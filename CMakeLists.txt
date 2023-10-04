@@ -8,13 +8,23 @@ set(CMAKE_AUTOUIC ON)
 
 set(CMAKE_PREFIX_PATH "D:/MyPrograms/Qt/5.15.2/mingw81_32")
 
+set(IceMark_HEADERS IceMark.h marktools.h PainterConfig.h)
+set(IceMark_SOURCES main.cpp IceMark.cpp marktools.cpp PainterConfig.cpp)
+set(IceMark_RESOURCES markTools.qrc)
+set(IceMark_FORMS marktools.ui)
+
 find_package(Qt5 COMPONENTS
         Core
         Gui
         Widgets
         REQUIRED)
 
-add_executable(IceMark main.cpp)
+add_executable(IceMark
+        ${IceMark_HEADERS}
+        ${IceMark_SOURCES}
+        ${IceMark_RESOURCES}
+        ${IceMark_FORMS})
+
 target_link_libraries(IceMark
         Qt5::Core
         Qt5::Gui
