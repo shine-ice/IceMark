@@ -171,7 +171,7 @@ void MarkTools::mouseReleaseEvent(QMouseEvent *event) {
 }
 
 void MarkTools::wheelEvent(QWheelEvent *event) {
-    if (this->isOpen && isPointInImageWidget(event->pos()))
+    if (this->isOpen && isPointInImageWidget(event->position().toPoint()))
     {
         QPoint numDegrees = event->angleDelta();
         if (!numDegrees.isNull())
@@ -832,6 +832,8 @@ void MarkTools::on_scanTBtn_clicked(bool checked)
                                 | QZXing::SourceFilter_ImageNormal);
     QString info = decode.decodeImage(this->originImage.toImage());
     qDebug() << "qr code : " << info;
+    // 浏览器打开链接
+    QDesktopServices::openUrl(info);
 }
 
 void MarkTools::on_confirmTBtn_clicked(bool checked)

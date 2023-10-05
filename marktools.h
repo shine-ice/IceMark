@@ -15,6 +15,7 @@
 #include <QColorDialog>
 #include <QLineEdit>
 #include "QZXing/QZXing.h"
+#include <QDesktopServices>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MarkTools; }
