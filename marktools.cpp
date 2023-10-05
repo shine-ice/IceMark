@@ -526,7 +526,7 @@ void MarkTools::changePainter(PainterConfig::DrawShape shape)
             //painterConfigArr.last()->lineStyle->pen.setBrush(this->originImage.scaled(this->originImage.size()));
 
             painterConfigArr.last()->setPenWidth(5);
-            painterConfigArr.last()->setMosaic(this->originImage);
+            painterConfigArr.last()->setMosaic(this->markedImage);
             break;
         case PainterConfig::Eraser:
 //            painterConfigArr.last()->setPenWidth(1);
@@ -884,9 +884,9 @@ bool MarkTools::eventFilter(QObject *watched, QEvent *event) {
 void MarkTools::paintWidget() {
     painter.begin(ui->paintArea);
 
-    QPixmap copy = this->originImage.copy();
-    draw(&copy);
-    painter.drawPixmap(0, 0, copy);
+    markedImage = this->originImage.copy();
+    draw(&markedImage);
+    painter.drawPixmap(0, 0, markedImage);
 
     painter.end();
 }

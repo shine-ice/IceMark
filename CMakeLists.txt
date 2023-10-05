@@ -13,10 +13,17 @@ set(IceMark_SOURCES main.cpp IceMark.cpp marktools.cpp PainterConfig.cpp)
 set(IceMark_RESOURCES markTools.qrc)
 set(IceMark_FORMS marktools.ui)
 
+# 引入OpenCV
+set(OpenCV_DIR "G:/opencv_build/opencv-3.4.3/build_x86_world/install")
+find_package(OpenCV REQUIRED)
+include_directories(${OpenCV_INCOUDE_DIRS})
+
 find_package(Qt5 COMPONENTS
         Core
         Gui
         Widgets
+        OpenGL
+        Test
         REQUIRED)
 
 add_executable(IceMark
@@ -29,6 +36,9 @@ target_link_libraries(IceMark
         Qt5::Core
         Qt5::Gui
         Qt5::Widgets
+        Qt5::OpenGL
+        Qt5::Test
+        ${OpenCV_LIBS}
         )
 
 if (WIN32)

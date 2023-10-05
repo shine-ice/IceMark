@@ -514,7 +514,8 @@ void PainterConfig::drawPathImage()
 void PainterConfig::setMosaic(QPixmap pix)
 {
     QImage img = pix.toImage();
-    lineStyle->pen.setBrush(QBrush(*blurImage(&img)));
+    img = img.convertToFormat(QImage::Format_RGB888);
+    lineStyle->pen.setBrush(QBrush(blurImage(img)));
 }
 
 void PainterConfig::setEraser(QPixmap pix)
@@ -522,43 +523,48 @@ void PainterConfig::setEraser(QPixmap pix)
     lineStyle->pen.setBrush(pix);
 }
 
-QImage* PainterConfig::blurImage(QImage *origin)
+QImage PainterConfig::blurImage(QImage img)
 {
-    QImage * newImage = new QImage(*origin);
+    cv::Mat mat = this->QImage2cvMat(img);
+    // 模糊
+    cv::GaussianBlur(mat, mat, cv::Size(15, 15), 10);
+    img = cvMat2QImage(mat);
+    return img;
+}
 
-    int kernel [5][5]= {{1,4,6,4,1},
-                        {4,16,24,16,4},
-                        {6,24,36,24,6},
-                        {1,4,6,4,1},
-                        {4,16,24,16,4}};
-    int kernelSize = 5;
-    int sumKernel = 256;
-    int r,g,b;
-    QColor color;
+QImage PainterConfig::cvMat2QImage(const cv::Mat mat) {
+    if (mat.type() == CV_8UC3)
+    {
+        QImage image(mat.data,
+                     mat.cols,
+                     mat.rows,
+                     mat.step,
+                     QImage::Format_RGB888);
+        return image.rgbSwapped();
+    }
+    else
+    {
+        // TODO 使用提示框
+        qDebug() << "error: mat not to QImage";
+        return QImage();
+    }
+}
 
-    for(int x=kernelSize/2; x<newImage->width()-(kernelSize/2); x++){
-        for(int y=kernelSize/2; y<newImage->height()-(kernelSize/2); y++){
-
-            r = 0;
-            g = 0;
-            b = 0;
-
-            for(int i = -kernelSize/2; i<= kernelSize/2; i++){
-                for(int j = -kernelSize/2; j<= kernelSize/2; j++){
-                    color = QColor(origin->pixel(x+i, y+j));
-                    r += color.red()*kernel[kernelSize/2+i][kernelSize/2+j];
-                    g += color.green()*kernel[kernelSize/2+i][kernelSize/2+j];
-                    b += color.blue()*kernel[kernelSize/2+i][kernelSize/2+j];
-                }
-            }
-
-            r = qBound(0, r/sumKernel, 255);
-            g = qBound(0, g/sumKernel, 255);
-            b = qBound(0, b/sumKernel, 255);
-
-            newImage->setPixel(x,y, qRgb(r,g,b));
-
+cv::Mat PainterConfig::QImage2cvMat(const QImage image) {
+    cv::Mat mat;
+    switch (image.format())
+    {
+        case QImage::Format_RGB888:
+        {
+            mat = cv::Mat(image.height(),
+                          image.width(),
+                          CV_8UC(3),
+                          (void *)image.bits(),
+                          image.bytesPerLine());
+            cv::cvtColor(mat, mat, CV_RGB2BGR);
+            break;
         }
     }
-    return newImage;
+
+    return mat;
 }

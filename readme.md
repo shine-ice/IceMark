@@ -30,3 +30,18 @@ qt_add_resources(${QRC_SOURCE_FILE})
 ```shell
 add_executable(xxx xxx.cpp ${QRC_SOURCE_FILE})
 ```
+
+
+
+## x.2 读取不同后缀的文件
+
+> [QImageWriter QPixmap QImage 不支持jpg和tiff的问题](https://blog.csdn.net/technologyleader/article/details/89031071)
+>
+> [QImage 通过load打开图片失败的一种特殊情况](https://blog.csdn.net/wkr2005/article/details/90072532)
+>
+> [QT Qimage、QPixmap等读取图片失败的几种可能情况](https://blog.csdn.net/qq_39295271/article/details/105755167)
+
+QImageWriter/QPixmap/QImage不能读取jpg图像问题，是因为没有把支持相应格式的动态库放到程序运行目录；
+
+从Qt的安装目录下的plugins文件夹下拷贝文件夹imageformats到程序当前的运行目录下，重新运行你的程序，就能够正常读取jpg图像。
+

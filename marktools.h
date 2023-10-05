@@ -144,6 +144,7 @@ private:
     int screenHeight;
 
     QPixmap originImage;            // 待标注的图片
+    QPixmap markedImage;            // 标注完成的图片
     int curDoStep;                  // 当前操作的步数
     QRect lastAlignRect;            // 上次参考的显示位置
 

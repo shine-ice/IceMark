@@ -33,14 +33,6 @@ void IceMark::markImage() {
     // 文件后缀不正确用下面方法加载
     else
     {
-        QFile file(fileName);
-        if (!file.open(QIODevice::ReadOnly))
-        {
-            QMessageBox::warning(this, tr("提示"), tr("打开文件失败"));
-            return;
-        }
-        pix.loadFromData(file.readAll());
-        MarkTools *markTools = new MarkTools(nullptr, pix, QPoint(0, 0));
-        markTools->show();
+        qDebug() << "open file error ... ";
     }
 }

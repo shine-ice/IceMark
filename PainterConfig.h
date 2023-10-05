@@ -12,6 +12,9 @@
 #include <QtMath>
 #include <QDebug>
 #include <QGraphicsEffect>
+#include <QMessageBox>
+#include <opencv2/opencv.hpp>
+#include <opencv2/imgproc.hpp>
 
 class PainterConfig {
 public:
@@ -91,7 +94,10 @@ public:
     void drawPathImage();
     void setMosaic(QPixmap pix);
     void setEraser(QPixmap pix);
-    QImage *blurImage(QImage *img);
+    QImage blurImage(QImage img);
+
+    QImage cvMat2QImage(const cv::Mat mat);
+    cv::Mat QImage2cvMat(const QImage image);
 
 private:
     QVector<QPoint> getArrowShape(QPoint beginPoint, QPoint endPoint, int type);
