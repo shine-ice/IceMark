@@ -18,6 +18,11 @@ set(OpenCV_DIR "G:/opencv_build/opencv-3.4.3/build_x86_world/install")
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCOUDE_DIRS})
 
+# 引入QZXing
+add_compile_definitions(ENABLE_ENCODER_GENERIC)
+include_directories(${PROJECT_SOURCE_DIR}/include)
+link_directories(${PROJECT_SOURCE_DIR}/lib/QZXing)
+
 find_package(Qt5 COMPONENTS
         Core
         Gui
@@ -39,6 +44,7 @@ target_link_libraries(IceMark
         Qt5::OpenGL
         Qt5::Test
         ${OpenCV_LIBS}
+        QZXing3
         )
 
 if (WIN32)

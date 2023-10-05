@@ -822,6 +822,18 @@ void MarkTools::on_copyTBtn_clicked(bool checked)
     initDoneTBtnGroupState();
 }
 
+void MarkTools::on_scanTBtn_clicked(bool checked)
+{
+    // 识别二维码
+    QZXing decode;
+    decode.setDecoder(QZXing::DecoderFormat_QR_CODE);
+    decode.setSourceFilterType(QZXing::TryHarderBehaviour_ThoroughScanning
+                                | QZXing::TryHarderBehaviour_Rotate
+                                | QZXing::SourceFilter_ImageNormal);
+    QString info = decode.decodeImage(this->originImage.toImage());
+    qDebug() << "qr code : " << info;
+}
+
 void MarkTools::on_confirmTBtn_clicked(bool checked)
 {
     // 发送信号

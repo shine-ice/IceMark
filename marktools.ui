@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>664</width>
+    <width>734</width>
     <height>423</height>
    </rect>
   </property>
@@ -650,6 +650,9 @@ padding: 0;
              <height>40</height>
             </size>
            </property>
+           <property name="toolTip">
+            <string>回撤</string>
+           </property>
            <property name="styleSheet">
             <string notr="true">QToolButton,
 QToolButton:hover,
@@ -697,6 +700,9 @@ padding: 0;
              <width>40</width>
              <height>40</height>
             </size>
+           </property>
+           <property name="toolTip">
+            <string>重做</string>
            </property>
            <property name="styleSheet">
             <string notr="true">QToolButton,
@@ -751,7 +757,7 @@ padding: 0;
         </property>
         <property name="maximumSize">
          <size>
-          <width>220</width>
+          <width>250</width>
           <height>40</height>
          </size>
         </property>
@@ -834,6 +840,9 @@ padding: 0;
              <height>40</height>
             </size>
            </property>
+           <property name="toolTip">
+            <string>取消</string>
+           </property>
            <property name="styleSheet">
             <string notr="true">QToolButton,
 QToolButton:hover,
@@ -881,6 +890,9 @@ padding: 0;
              <width>40</width>
              <height>40</height>
             </size>
+           </property>
+           <property name="toolTip">
+            <string>固定</string>
            </property>
            <property name="styleSheet">
             <string notr="true">QToolButton,
@@ -930,6 +942,9 @@ padding: 0;
              <height>40</height>
             </size>
            </property>
+           <property name="toolTip">
+            <string>保存</string>
+           </property>
            <property name="styleSheet">
             <string notr="true">QToolButton,
 QToolButton:hover,
@@ -978,6 +993,9 @@ padding: 0;
              <height>40</height>
             </size>
            </property>
+           <property name="toolTip">
+            <string>复制</string>
+           </property>
            <property name="styleSheet">
             <string notr="true">QToolButton,
 QToolButton:hover,
@@ -1013,6 +1031,54 @@ padding: 0;
           </widget>
          </item>
          <item>
+          <widget class="QToolButton" name="scanTBtn">
+           <property name="minimumSize">
+            <size>
+             <width>40</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>40</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>识别二维码</string>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QToolButton,
+QToolButton:hover,
+QToolButton:avtive {
+margin: 0;
+padding: 0;
+}</string>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset resource="markTools.qrc">
+             <normaloff>:/images/snipaste_normal/copy.png</normaloff>
+             <normalon>:/images/snipaste_active/copy.png</normalon>
+             <activeoff>:/images/snipaste_hover/copy.png</activeoff>:/images/snipaste_normal/copy.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>40</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="autoRaise">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QToolButton" name="confirmTBtn">
            <property name="minimumSize">
             <size>
@@ -1025,6 +1091,9 @@ padding: 0;
              <width>40</width>
              <height>40</height>
             </size>
+           </property>
+           <property name="toolTip">
+            <string>完成</string>
            </property>
            <property name="styleSheet">
             <string notr="true">QToolButton,
@@ -1993,9 +2062,9 @@ padding: 0;
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="arrowTBtnGroup"/>
   <buttongroup name="doneTBtnGroup"/>
-  <buttongroup name="baseTBtnGroup"/>
   <buttongroup name="doTBtnGroup"/>
+  <buttongroup name="arrowTBtnGroup"/>
+  <buttongroup name="baseTBtnGroup"/>
  </buttongroups>
 </ui>

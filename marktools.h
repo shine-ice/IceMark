@@ -14,6 +14,7 @@
 #include <QButtonGroup>
 #include <QColorDialog>
 #include <QLineEdit>
+#include "QZXing/QZXing.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MarkTools; }
@@ -108,6 +109,8 @@ private slots:
     void on_saveTBtn_clicked(bool checked);
 
     void on_copyTBtn_clicked(bool checked);
+
+    void on_scanTBtn_clicked(bool checked);
 
     void on_confirmTBtn_clicked(bool checked);
 
